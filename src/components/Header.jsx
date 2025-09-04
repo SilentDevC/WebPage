@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ShoppingBag, Search, User, ShieldCheck } from 'lucide-react';
+import { Menu, X, ShoppingBag, Search, User, ShieldCheck, Feather } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import CartDrawer from '@/components/CartDrawer';
+import { cn } from '@/lib/utils';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ const Header = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100"
+        className={cn("fixed top-0 left-0 right-0 z-40 border-b", "glass-effect")}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -43,8 +44,8 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Link to="/" className="text-2xl font-bold text-gray-900">
-                Minimal
+              <Link to="/" className="text-2xl font-bold text-primary flex items-center gap-2">
+                <Feather /> Minimal
               </Link>
             </motion.div>
 
@@ -59,8 +60,8 @@ const Header = () => {
                     to={item.href}
                     className={`text-sm font-medium transition-colors duration-200 ${
                       location.pathname === item.href
-                        ? 'text-gray-900 border-b-2 border-gray-900 pb-1'
-                        : 'text-gray-600 hover:text-gray-900'
+                        ? 'text-primary border-b-2 border-primary pb-1'
+                        : 'text-foreground/80 hover:text-primary'
                     }`}
                   >
                     {item.name}
@@ -78,7 +79,7 @@ const Header = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSearchClick}
-                  className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                  className="p-2 text-foreground/80 hover:text-primary transition-colors"
                 >
                   <Search className="h-5 w-5" />
                 </motion.button>
@@ -88,14 +89,14 @@ const Header = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                className="relative p-2 text-foreground/80 hover:text-primary transition-colors"
               >
                 <ShoppingBag className="h-5 w-5" />
                 {getCartItemsCount() > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-gray-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                    className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center"
                   >
                     {getCartItemsCount()}
                   </motion.span>
@@ -104,14 +105,14 @@ const Header = () => {
               
               {isAdmin && (
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                   <Link to="/admin" className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                      <ShieldCheck className="h-5 w-5 text-blue-600" />
+                   <Link to="/admin" className="p-2 text-blue-600 hover:text-blue-700 transition-colors">
+                      <ShieldCheck className="h-5 w-5" />
                    </Link>
                 </motion.div>
               )}
 
               <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                 <Link to="/profile" className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                 <Link to="/profile" className="p-2 text-foreground/80 hover:text-primary transition-colors">
                     <User className="h-5 w-5" />
                  </Link>
               </motion.div>
@@ -120,7 +121,7 @@ const Header = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
               >
                 {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </motion.button>
@@ -135,7 +136,7 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-white border-t border-gray-100"
+              className="md:hidden glass-effect border-t"
             >
               <div className="px-4 py-4 space-y-4">
                 {navigation.map((item) => (
@@ -150,8 +151,8 @@ const Header = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className={`block text-base font-medium transition-colors duration-200 ${
                         location.pathname === item.href
-                          ? 'text-gray-900'
-                          : 'text-gray-600 hover:text-gray-900'
+                          ? 'text-primary'
+                          : 'text-foreground/80 hover:text-primary'
                       }`}
                     >
                       {item.name}

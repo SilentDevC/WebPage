@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Toaster } from '@/components/ui/toaster';
@@ -15,13 +16,32 @@ import Profile from '@/pages/Profile';
 import About from '@/pages/About';
 import AdminPanel from '@/pages/AdminPanel';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import SplashScreen from '@/components/SplashScreen';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    if (hasVisited) {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleAnimationComplete = () => {
+    setLoading(false);
+    sessionStorage.setItem('hasVisited', 'true');
+  };
+
   return (
     <Router>
       <AuthProvider>
         <CartProvider>
-          <div className="min-h-screen bg-white">
+          <AnimatePresence>
+            {loading && <SplashScreen onAnimationComplete={handleAnimationComplete} />}
+          </AnimatePresence>
+          <div className="min-h-screen bg-background text-foreground">
             <Helmet>
               <title>Minimal Merch - Premium Apparel & Accessories</title>
               <meta name="description" content="Discover premium merch with minimalist design and exceptional quality. Shop our curated collection of modern essentials." />

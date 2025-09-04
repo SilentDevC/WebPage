@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Instagram, Twitter, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Twitter, Facebook, Leaf } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -25,7 +26,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
+    <footer className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -36,23 +37,24 @@ const Footer = () => {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <Link to="/" className="text-2xl font-bold text-gray-900 mb-4 block">
-              Minimal
+            <Link to="/" className="flex items-center space-x-2 text-2xl font-bold text-primary mb-4">
+                <Leaf />
+                <span>Minimal</span>
             </Link>
-            <p className="text-gray-600 mb-6 leading-relaxed max-w-md">
+            <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
               Curating premium products with minimalist design and exceptional quality for the modern lifestyle.
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-3">
-              <div className="flex items-center text-gray-600">
-                <Mail className="h-4 w-4 mr-3" />
+              <div className="flex items-center text-muted-foreground">
+                <Mail className="h-4 w-4 mr-3 text-primary" />
                 <span className="text-sm">hello@minimal.com</span>
               </div>
-              <div className="flex items-center text-gray-600">
-                <Phone className="h-4 w-4 mr-3" />
+              <div className="flex items-center text-muted-foreground">
+                <Phone className="h-4 w-4 mr-3 text-primary" />
                 <span className="text-sm">+1 (555) 123-4567</span>
               </div>
-              <div className="flex items-center text-gray-600">
-                <MapPin className="h-4 w-4 mr-3" />
+              <div className="flex items-center text-muted-foreground">
+                <MapPin className="h-4 w-4 mr-3 text-primary" />
                 <span className="text-sm">New York, NY 10001</span>
               </div>
             </div>
@@ -65,7 +67,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4 block">
+            <span className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4 block">
               Company
             </span>
             <ul className="space-y-3">
@@ -73,7 +75,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
                   >
                     {link.name}
                   </Link>
@@ -89,7 +91,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4 block">
+            <span className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4 block">
               Legal
             </span>
             <ul className="space-y-3">
@@ -97,7 +99,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
                   >
                     {link.name}
                   </a>
@@ -113,9 +115,9 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center"
+          className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center"
         >
-          <p className="text-gray-600 text-sm mb-4 md:mb-0">
+          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
             © {currentYear} Minimal Store. All rights reserved.
           </p>
           
@@ -126,7 +128,7 @@ const Footer = () => {
                 href={social.href}
                 whileHover={{ scale: 1.1, y: -2 }}
                 transition={{ duration: 0.2 }}
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="text-muted-foreground/60 hover:text-primary transition-colors duration-200"
               >
                 <social.icon className="h-5 w-5" />
               </motion.a>

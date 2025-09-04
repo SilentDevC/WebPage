@@ -46,29 +46,31 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="absolute inset-0">
-          <img  class="w-full h-full object-cover opacity-10" alt="Stylish person wearing modern merch" src="https://images.unsplash.com/photo-1690689636686-e941fd7f8a00" />
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img  class="w-full h-full object-cover" alt="Dark wooden wall with green leaves peeking from the sides" src="https://images.unsplash.com/photo-1570421155992-88a155397dae" />
+          <div className="absolute inset-0 bg-black/50"></div>
         </div>
+
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-light text-gray-900 mb-6 leading-tight"
+            className="text-5xl md:text-7xl font-light text-white mb-6 leading-tight"
           >
-            Wear Your
+            Nature's
             <br />
-            <span className="font-semibold">Passion</span>
+            <span className="font-semibold text-gradient bg-gradient-to-r from-emerald-300 to-green-300">Essence</span>
           </motion.h1>
           
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed"
+            className="text-xl md:text-2xl text-green-100/80 mb-8 leading-relaxed"
           >
             Premium merch designed for the modern fan. High-quality apparel and accessories.
           </motion.p>
@@ -77,16 +79,13 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex justify-center"
           >
-            <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3">
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
               <Link to="/products">
                 Shop The Collection
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="px-8 py-3">
-              <Link to="/about">About Us</Link>
             </Button>
           </motion.div>
         </div>
@@ -97,18 +96,18 @@ const Home = () => {
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         >
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+              className="w-1 h-3 bg-white/50 rounded-full mt-2"
             />
           </div>
         </motion.div>
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -117,8 +116,8 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-light text-gray-900 mb-4">Featured Merch</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-light text-foreground mb-4">Featured Merch</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Handpicked essentials that combine style and fandom.
             </p>
           </motion.div>
@@ -134,7 +133,7 @@ const Home = () => {
                 whileHover={{ y: -8 }}
                 className="group cursor-pointer"
               >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                <div className="bg-card rounded-2xl overflow-hidden shadow-sm border border-border hover:shadow-xl transition-all duration-300">
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={product.image}
@@ -150,19 +149,19 @@ const Home = () => {
                             key={i}
                             className={`h-4 w-4 ${
                               i < Math.floor(product.rating)
-                                ? 'text-yellow-400 fill-current'
+                                ? 'text-yellow-400 fill-yellow-400'
                                 : 'text-gray-300'
                             }`}
                           />
                         ))}
                       </div>
-                      <span className="text-sm text-gray-500 ml-2">({product.reviews})</span>
+                      <span className="text-sm text-muted-foreground ml-2">({product.reviews})</span>
                     </div>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">{product.name}</h3>
-                    <p className="text-2xl font-light text-gray-900 mb-4">${product.price}</p>
+                    <h3 className="text-xl font-medium text-foreground mb-2">{product.name}</h3>
+                    <p className="text-2xl font-light text-foreground mb-4">${product.price}</p>
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-gray-900 hover:bg-gray-800 text-white"
+                      className="w-full"
                     >
                       Add to Cart
                     </Button>

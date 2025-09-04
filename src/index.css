@@ -1,3 +1,4 @@
+@import 'leaflet/dist/leaflet.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,25 +6,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 3.9%;
-  --primary: 0 0% 9%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96.1%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 96.1%;
-  --muted-foreground: 0 0% 45.1%;
-  --accent: 0 0% 96.1%;
-  --accent-foreground: 0 0% 9%;
+  --background: 40 33% 96%; /* Light Beige */
+  --foreground: 40 10% 10%; /* Almost Black */
+
+  --card: 40 33% 99%; /* Lighter Beige */
+  --card-foreground: 40 10% 10%;
+
+  --popover: 40 33% 99%;
+  --popover-foreground: 40 10% 10%;
+
+  --primary: 140 40% 25%; /* Dark Green */
+  --primary-foreground: 140 5% 96%;
+
+  --secondary: 140 20% 90%; /* Light Green-Gray */
+  --secondary-foreground: 140 40% 25%;
+
+  --muted: 140 15% 88%; /* Muted Green-Gray */
+  --muted-foreground: 40 10% 40%;
+
+  --accent: 140 20% 90%;
+  --accent-foreground: 140 40% 25%;
+
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 89.8%;
-  --input: 0 0% 89.8%;
-  --ring: 0 0% 3.9%;
+
+  --border: 140 15% 85%;
+  --input: 140 15% 85%;
+  --ring: 140 40% 30%;
   --radius: 0.5rem;
 }
 
@@ -40,13 +49,14 @@ body {
 }
 
 .glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsla(var(--background) / 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: hsla(var(--border) / 0.3);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(140, 30%, 35%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -59,4 +69,22 @@ body {
 .hover-lift:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+}
+.leaflet-bar a {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--primary)) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+}
+.leaflet-bar a:hover {
+  background-color: hsl(var(--accent)) !important;
+}
+.leaflet-control-attribution {
+  background: hsla(var(--background), 0.8) !important;
+  color: hsl(var(--foreground)) !important;
 }

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { cn } from '@/lib/utils';
 
 const GoogleIcon = () => (
   <svg className="h-5 w-5 mr-3" viewBox="0 0 48 48">
@@ -37,86 +38,89 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div className="relative min-h-screen flex items-center justify-center p-4">
+      <div className="absolute inset-0 -z-10">
+        <img  className="w-full h-full object-cover" alt="Lush wall of green leaves background" src="https://images.unsplash.com/photo-1494855591225-56ef6170ec5f" />
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-md"
+        className={cn("w-full max-w-md rounded-2xl shadow-2xl p-8", "glass-effect")}
       >
-        <div className="bg-white p-8 rounded-2xl shadow-lg">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-light text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">Sign in to continue to your account.</p>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-semibold text-primary mb-2">Welcome Back</h1>
+          <p className="font-medium text-foreground/80">Sign in to continue to your account.</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
+              Username or Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-3 border border-input rounded-lg bg-background/50 text-foreground font-semibold focus:ring-2 focus:ring-primary focus:border-transparent transition-colors placeholder:text-muted-foreground"
+              placeholder="admin or your@email.com"
+            />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Username or Email
+          <div>
+            <div className="flex justify-between items-baseline">
+              <label htmlFor="password" className="block text-sm font-semibold text-foreground mb-2">
+                Password
               </label>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                placeholder="admin or your@email.com"
-              />
+              <a href="#" className="text-sm text-foreground/80 hover:text-foreground">Forgot password?</a>
             </div>
-
-            <div>
-              <div className="flex justify-between items-baseline">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
-                <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Forgot password?</a>
-              </div>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
-                placeholder="••••••••"
-              />
-            </div>
-            
-            <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3">
-              Sign In
-            </Button>
-          </form>
-
-          <div className="relative my-8">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">OR</span>
-            </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-3 border border-input rounded-lg bg-background/50 text-foreground font-semibold focus:ring-2 focus:ring-primary focus:border-transparent transition-colors placeholder:text-muted-foreground"
+              placeholder="••••••••"
+            />
           </div>
-
-          <Button
-            onClick={handleGoogleSignIn}
-            variant="outline"
-            className="w-full py-3"
-          >
-            <GoogleIcon />
-            Sign in with Google
-          </Button>
           
-          <div className="text-center mt-8">
-            <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <a href="#" className="font-medium text-gray-900 hover:underline">
-                Sign up
-              </a>
-            </p>
+          <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3">
+            Sign In
+          </Button>
+        </form>
+
+        <div className="relative my-8">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border" />
           </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-transparent px-2 text-muted-foreground backdrop-blur-sm">OR</span>
+          </div>
+        </div>
+
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="outline"
+          className="w-full py-3 bg-card/90 text-foreground hover:bg-card"
+        >
+          <GoogleIcon />
+          Sign in with Google
+        </Button>
+        
+        <div className="text-center mt-8">
+          <p className="text-sm text-foreground/80">
+            Don't have an account?{' '}
+            <a href="#" className="font-semibold text-primary hover:underline">
+              Sign up
+            </a>
+          </p>
         </div>
       </motion.div>
     </div>
