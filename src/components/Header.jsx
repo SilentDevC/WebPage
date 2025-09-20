@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ShoppingBag, Search, User, ShieldCheck, Feather } from 'lucide-react';
+import { Menu, X, ShoppingBag, Search, User, Feather } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/components/ui/use-toast';
-import { useAuth } from '@/contexts/AuthContext';
 import CartDrawer from '@/components/CartDrawer';
 import { cn } from '@/lib/utils';
 
-const Header = () => {
+const Header = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
   const location = useLocation();
   const { getCartItemsCount } = useCart();
   const { toast } = useToast();
-  const { isAdmin } = useAuth();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -28,6 +27,12 @@ const Header = () => {
       title: "🔍 Search Feature",
       description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
     });
+  };
+
+  const navItemVariants = {
+    initial: { scale: 1 },
+    hover: { scale: 1.2, y: -2 },
+    shrink: { scale: 0.9 },
   };
 
   return (
@@ -49,26 +54,40 @@ const Header = () => {
               </Link>
             </motion.div>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <motion.div 
+              className="hidden md:flex items-center space-x-8"
+              onMouseLeave={() => setHoveredItem(null)}
+            >
               {navigation.map((item) => (
                 <motion.div
                   key={item.name}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
+                  onMouseEnter={() => setHoveredItem(item.name)}
+                  variants={navItemVariants}
+                  animate={hoveredItem ? (hoveredItem === item.name ? 'hover' : 'shrink') : 'initial'}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="relative"
                 >
                   <Link
                     to={item.href}
-                    className={`text-sm font-medium transition-colors duration-200 ${
+                    className={`text-base transition-colors duration-200 nav-link ${
                       location.pathname === item.href
-                        ? 'text-primary border-b-2 border-primary pb-1'
+                        ? 'text-primary font-semibold'
                         : 'text-foreground/80 hover:text-primary'
                     }`}
                   >
                     {item.name}
                   </Link>
+                  {location.pathname === item.href && (
+                     <motion.div
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                        layoutId="underline"
+                        initial={false}
+                        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                     />
+                  )}
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <div className="flex items-center space-x-2">
               {location.pathname === '/products' && (
@@ -103,14 +122,6 @@ const Header = () => {
                 )}
               </motion.button>
               
-              {isAdmin && (
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                   <Link to="/admin" className="p-2 text-blue-600 hover:text-blue-700 transition-colors">
-                      <ShieldCheck className="h-5 w-5" />
-                   </Link>
-                </motion.div>
-              )}
-
               <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                  <Link to="/profile" className="p-2 text-foreground/80 hover:text-primary transition-colors">
                     <User className="h-5 w-5" />
@@ -168,6 +179,6 @@ const Header = () => {
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
-};
+});
 
 export default Header;

@@ -1,3 +1,4 @@
+
 @import 'leaflet/dist/leaflet.css';
 @tailwind base;
 @tailwind components;
@@ -6,33 +7,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --background: 40 33% 96%; /* Light Beige */
-  --foreground: 40 10% 10%; /* Almost Black */
+  --background: 220 10% 96%; /* Very Light Gray */
+  --foreground: 220 10% 10%; /* Almost Black */
 
-  --card: 40 33% 99%; /* Lighter Beige */
-  --card-foreground: 40 10% 10%;
+  --card: 220 10% 99%; /* Lighter Gray */
+  --card-foreground: 220 10% 10%;
 
-  --popover: 40 33% 99%;
-  --popover-foreground: 40 10% 10%;
+  --popover: 220 10% 99%;
+  --popover-foreground: 220 10% 10%;
 
-  --primary: 140 40% 25%; /* Dark Green */
-  --primary-foreground: 140 5% 96%;
+  --primary: 220 15% 25%; /* Dark Slate Gray */
+  --primary-foreground: 220 10% 96%;
 
-  --secondary: 140 20% 90%; /* Light Green-Gray */
-  --secondary-foreground: 140 40% 25%;
+  --secondary: 220 10% 90%; /* Light Gray */
+  --secondary-foreground: 220 15% 25%;
 
-  --muted: 140 15% 88%; /* Muted Green-Gray */
-  --muted-foreground: 40 10% 40%;
+  --muted: 220 10% 88%; /* Muted Gray */
+  --muted-foreground: 220 10% 40%;
 
-  --accent: 140 20% 90%;
-  --accent-foreground: 140 40% 25%;
+  --accent: 220 10% 90%;
+  --accent-foreground: 220 15% 25%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 140 15% 85%;
-  --input: 140 15% 85%;
-  --ring: 140 40% 30%;
+  --border: 220 10% 85%;
+  --input: 220 10% 85%;
+  --ring: 220 15% 30%;
   --radius: 0.5rem;
 }
 
@@ -56,7 +57,7 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(140, 30%, 35%));
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(220, 10%, 45%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -87,4 +88,8 @@ body {
 .leaflet-control-attribution {
   background: hsla(var(--background), 0.8) !important;
   color: hsl(var(--foreground)) !important;
+}
+
+.nav-link:hover {
+  font-weight: 600;
 }

@@ -49,28 +49,33 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img  class="w-full h-full object-cover" alt="Dark wooden wall with green leaves peeking from the sides" src="https://images.unsplash.com/photo-1570421155992-88a155397dae" />
+        <motion.div 
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img class="w-full h-full object-cover" alt="Lone misty mountain in the center of the image" src="https://images.unsplash.com/photo-1550757627-155698319664" />
           <div className="absolute inset-0 bg-black/50"></div>
-        </div>
+        </motion.div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-5xl md:text-7xl font-light text-white mb-6 leading-tight"
           >
             Nature's
             <br />
-            <span className="font-semibold text-gradient bg-gradient-to-r from-emerald-300 to-green-300">Essence</span>
+            <span className="font-semibold text-gradient bg-gradient-to-r from-gray-300 to-gray-100">Essence</span>
           </motion.h1>
           
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-green-100/80 mb-8 leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="text-xl md:text-2xl text-gray-200/80 mb-8 leading-relaxed"
           >
             Premium merch designed for the modern fan. High-quality apparel and accessories.
           </motion.p>
@@ -78,7 +83,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="flex justify-center"
           >
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
@@ -91,9 +96,9 @@ const Home = () => {
         </div>
         
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         >
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">

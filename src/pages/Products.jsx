@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -128,7 +129,7 @@ const Products = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <h1 className="text-4xl font-light text-gray-900 mb-4">All Merch</h1>
@@ -138,7 +139,7 @@ const Products = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <motion.aside initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="lg:col-span-1">
-            <div className="sticky top-24">
+            <div className="sticky top-24 max-h-[calc(100vh-10rem)] overflow-y-auto pr-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-light">Filters</h2>
                 <Button variant="ghost" onClick={clearFilters} className="text-sm">Clear All</Button>
@@ -186,7 +187,7 @@ const Products = () => {
                     <div className={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'flex w-full' : ''}`}>
                       <div className={`overflow-hidden ${viewMode === 'list' ? 'w-48 h-48 flex-shrink-0' : 'aspect-square'}`}>
                         <Link to={`/product/${product.id}`}>
-                          <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" />
+                          <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" />
                         </Link>
                       </div>
                       <div className={`p-6 ${viewMode === 'list' ? 'flex-1 flex flex-col justify-between' : ''}`}>
