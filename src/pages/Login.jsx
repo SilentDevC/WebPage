@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center p-4">
       <div className="absolute inset-0 -z-10">
-        <img  className="w-full h-full object-cover" alt="Lush wall of green leaves background" src="https://images.unsplash.com/photo-1494855591225-56ef6170ec5f" />
+        <img className="w-full h-full object-cover" alt="Lone misty mountain in the center of the image" src="https://images.unsplash.com/photo-1550757627-155698319664" />
         <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
